@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\StoreKebabAction;
 use App\Http\Requests\StoreKebabRequest;
+use App\Http\Resources\KebabResource;
 use App\KebabDTO;
 use App\Models\Kebab;
 use Illuminate\Http\JsonResponse;
@@ -18,7 +19,7 @@ class KebabController extends Controller
      */
     public function index()
     {
-        return Kebab::all();
+        return KebabResource::collection(Kebab::orderBy('id', 'desc')->get());
     }
 
     /**

@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class KebabResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    //     public readonly string $name,
+    //     public readonly ?UploadedFile $logo,
+    //     public readonly string $address,
+    //     public readonly float|string $coordinatesX,
+    //     public readonly float|string $coordinatesY,
+    //     public readonly ?int $openingYear,
+    //     public readonly ?int $closingYear,
+    //     public readonly string $status,
+    //     public readonly bool|string $isKraft,
+    //     public readonly bool|string $isFoodTruck,
+    //     public readonly ?string $network,
+    //     public readonly ?string $appLink,
+    //     public readonly ?string $websiteLink,
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'logoUrl' => $this->logo_url,
+            'address' => $this->address,
+            'coordinatesX' => $this->coordinates_x,
+            'coordinatesY' => $this->coordinates_y,
+            'openingYear' => $this->opening_year,
+            'closingYear' => $this->closing_year,
+            'status' => $this->status,
+            'isKraft' => $this->is_kraft,
+            'isFoodTruck' => $this->is_food_truck,
+            'network' => $this->network,
+            'appLink' => $this->app_link,
+            'websiteLink' => $this->website_link,
+        ];
+    }
+}
