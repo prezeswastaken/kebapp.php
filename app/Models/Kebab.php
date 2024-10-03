@@ -18,4 +18,24 @@ class Kebab extends Model
     }
 
     protected $guarded = [];
+
+    public function meatTypes()
+    {
+        return $this->belongsToMany(MeatType::class);
+    }
+
+    public function sauces()
+    {
+        return $this->belongsToMany(Sauce::class);
+    }
+
+    public function openingHours()
+    {
+        return $this->hasMany(OpeningHoursDay::class);
+    }
+
+    public function getOpeningHoursAttribute()
+    {
+        return $this->openingHours;
+    }
 }
