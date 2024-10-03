@@ -13,19 +13,19 @@ class KebabDTO
      * Create a new class instance.
      */
     public function __construct(
-        protected string $name,
-        protected ?ImageFile $logo,
-        protected string $address,
-        protected float $coordinatesX,
-        protected float $coordinatesY,
-        protected ?int $openingYear,
-        protected ?int $closingYear,
-        protected string $status,
-        protected bool $isKraft,
-        protected bool $isFoodTruck,
-        protected ?string $network,
-        protected ?string $appLink,
-        protected ?string $websiteLink,
+        public readonly string $name,
+        public readonly ?ImageFile $logo,
+        public readonly string $address,
+        public readonly float $coordinatesX,
+        public readonly float $coordinatesY,
+        public readonly ?int $openingYear,
+        public readonly ?int $closingYear,
+        public readonly string $status,
+        public readonly bool $isKraft,
+        public readonly bool $isFoodTruck,
+        public readonly ?string $network,
+        public readonly ?string $appLink,
+        public readonly ?string $websiteLink,
     ) {}
 
     public static function fromRequest(Request $request): self
@@ -60,5 +60,22 @@ class KebabDTO
     // 'network' => ['nullable', 'string', 'max:255'],
     // 'appLink' => ['nullable', 'string', 'max:255'],
     // 'websiteLink' => ['nullable', 'string', 'max:255'],
-
+    //
+    public function toCreateData(): array
+    {
+        return [
+            'name' => $this->name,
+            'address' => $this->address,
+            'coordinates_x' => $this->coordinatesX,
+            'coordinates_y' => $this->coordinatesY,
+            'opening_year' => $this->openingYear,
+            'closing_year' => $this->closingYear,
+            'status' => $this->status,
+            'is_kraft' => $this->isKraft,
+            'is_food_truck' => $this->isFoodTruck,
+            'network' => $this->network,
+            'app_link' => $this->appLink,
+            'website_link' => $this->websiteLink,
+        ];
+    }
 }

@@ -1,8 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Actions\StoreKebabAction;
+use App\Http\Requests\StoreKebabRequest;
+use App\KebabDTO;
 use App\Models\Kebab;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class KebabController extends Controller
@@ -12,15 +18,18 @@ class KebabController extends Controller
      */
     public function index()
     {
-        //
+        return Kebab::all();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreKebabRequest $request, StoreKebabAction $action): JsonResponse
     {
-        //
+        $kebabDTO = KebabDTO::fromRequest($request);
+        $result = $action->handle($kebabDTO);
+
+        return response()->json($result);
     }
 
     /**
