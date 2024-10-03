@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\ImageFile;
+use Illuminate\Http\UploadedFile;
 
 class KebabDTO
 {
@@ -14,15 +14,15 @@ class KebabDTO
      */
     public function __construct(
         public readonly string $name,
-        public readonly ?ImageFile $logo,
+        public readonly ?UploadedFile $logo,
         public readonly string $address,
-        public readonly float $coordinatesX,
-        public readonly float $coordinatesY,
+        public readonly float|string $coordinatesX,
+        public readonly float|string $coordinatesY,
         public readonly ?int $openingYear,
         public readonly ?int $closingYear,
         public readonly string $status,
-        public readonly bool $isKraft,
-        public readonly bool $isFoodTruck,
+        public readonly bool|string $isKraft,
+        public readonly bool|string $isFoodTruck,
         public readonly ?string $network,
         public readonly ?string $appLink,
         public readonly ?string $websiteLink,
