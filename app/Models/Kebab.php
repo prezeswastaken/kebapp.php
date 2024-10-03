@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\KebabStatusCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,7 @@ class Kebab extends Model
         return [
             'is_kraft' => 'boolean',
             'is_food_truck' => 'boolean',
+            'status' => KebabStatusCast::class,
         ];
     }
 
