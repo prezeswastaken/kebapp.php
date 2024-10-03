@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MeatType;
 use Illuminate\Database\Seeder;
 
 class MeatTypeSeeder extends Seeder
@@ -18,5 +19,13 @@ class MeatTypeSeeder extends Seeder
             'Pork',
             'Falafel',
         ];
+
+        $insertData = collect($meatTypes)->map(fn ($meatType) => [
+            'name' => $meatType,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ])->toArray();
+
+        MeatType::insert($insertData);
     }
 }

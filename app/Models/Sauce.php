@@ -5,17 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kebab extends Model
+class Sauce extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 
     protected function casts(): array
     {
         return [
-            'is_kraft' => 'boolean',
-            'is_food_truck' => 'boolean',
+            'is_spicy' => 'boolean',
         ];
     }
 
-    protected $guarded = [];
+    public function kebabs()
+    {
+        return $this->belongsToMany(Kebab::class);
+    }
 }
