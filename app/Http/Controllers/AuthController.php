@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Actions\RegisterUserAction;
 use App\Exceptions\AuthException;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -41,9 +41,9 @@ class AuthController extends Controller
 
     }
 
-    public function me(#[CurrentUser] User $user): JWTSubject
+    public function me(#[CurrentUser] User $user)
     {
-        return $user;
+        return UserResource::make($user);
     }
 
     public function logout(): JsonResponse
@@ -61,9 +61,9 @@ class AuthController extends Controller
     protected function respondWithToken(string $token): JsonResponse
     {
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60,
+            'accessToken' => $token,
+            'tokenType' => 'bearer',
+            'expiresIn' => Auth::factory()->getTTL() * 60,
             'user' => JWTAuth::user(),
         ]);
     }

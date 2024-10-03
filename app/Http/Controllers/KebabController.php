@@ -30,7 +30,7 @@ class KebabController extends Controller
         $kebabDTO = KebabDTO::fromRequest($request);
         $result = $action->handle($kebabDTO);
 
-        return response()->json($result);
+        return response()->json(KebabResource::make($result), 201);
     }
 
     /**

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('address');
             $table->bigInteger('coordinates_x');
             $table->bigInteger('coordinates_y');
-            $table->string('opening_year')->nullable();
-            $table->string('closing_year')->nullable();
+            $table->bigInteger('opening_year')->nullable();
+            $table->bigInteger('closing_year')->nullable();
             $table->string('status');
             $table->boolean('is_kraft');
             $table->boolean('is_food_truck');
