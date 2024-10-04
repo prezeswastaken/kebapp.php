@@ -26,6 +26,10 @@ return new class extends Migration
             $table->string('network')->nullable();
             $table->string('app_link')->nullable();
             $table->string('website_link')->nullable();
+            $table->boolean('has_glovo')->default(false);
+            $table->boolean('has_pyszne')->default(false);
+            $table->boolean('has_ubereats')->default(false);
+            $table->string('phone_number')->nullable();
             $table->timestamps();
         });
     }

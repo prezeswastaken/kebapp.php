@@ -16,9 +16,9 @@ use Illuminate\Http\Request;
 
 class KebabController extends Controller
 {
-    public function paginated()
+    public function paginated(Request $request)
     {
-        $perPage = request()->get('perPage', 10);
+        $perPage = $request->get('perPage', 10);
 
         return KebabResource::collection(Kebab::with('openingHours')->orderBy('id', 'desc')->paginate($perPage));
     }
@@ -28,9 +28,6 @@ class KebabController extends Controller
         return KebabResource::collection(Kebab::with('openingHours')->orderBy('id', 'desc')->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreKebabRequest $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction): JsonResponse
     {
         $kebabDTO = KebabDTO::fromRequest($request);
@@ -38,31 +35,27 @@ class KebabController extends Controller
 
         $openingHoursDTO = OpeningHoursDTO::make($request->all(), $result->id);
         $storeOpeningHoursAction->handle($openingHoursDTO);
+        $result->load('openingHours');
 
         return response()->json(KebabResource::make($result), 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Kebab $kebab)
     {
-        //
+        $kebab->load('openingHours');
+
+        return response()->json(KebabResource::make($kebab));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Kebab $kebab)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Kebab $kebab)
     {
-        //
+        $kebab->delete();
+
+        return response()->json(null, 204);
     }
 }

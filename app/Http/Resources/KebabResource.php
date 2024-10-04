@@ -29,6 +29,10 @@ class KebabResource extends JsonResource
             'network' => $this->network,
             'appLink' => $this->app_link,
             'websiteLink' => $this->website_link,
+            'hasGlovo' => $this->has_glovo,
+            'hasPyszne' => $this->has_pyszne,
+            'hasUberEats' => $this->has_ubereats,
+            'phoneNumber' => $this->phone_number,
             'openingHours' => OpeningHoursDayResource::collection($this->whenLoaded('openingHours')),
         ];
     }

@@ -16,6 +16,9 @@ class Kebab extends Model
             'is_kraft' => 'boolean',
             'is_food_truck' => 'boolean',
             'status' => KebabStatusCast::class,
+            'has_glovo' => 'boolean',
+            'has_pyszne' => 'boolean',
+            'has_ubereats' => 'boolean',
         ];
     }
 

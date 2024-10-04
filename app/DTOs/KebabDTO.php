@@ -26,6 +26,10 @@ class KebabDTO
         public readonly ?string $network,
         public readonly ?string $appLink,
         public readonly ?string $websiteLink,
+        public readonly bool $hasGlovo,
+        public readonly bool $hasPyszne,
+        public readonly bool $hasUberEats,
+        public readonly ?string $phoneNumber,
     ) {}
 
     public static function fromRequest(Request $request): self
@@ -44,6 +48,10 @@ class KebabDTO
             $request->input('network'),
             $request->input('appLink'),
             $request->input('websiteLink'),
+            $request->input('hasGlovo') ?? false,
+            $request->input('hasPyszne') ?? false,
+            $request->input('hasUberEats') ?? false,
+            $request->input('phoneNumber'),
         );
     }
 
@@ -62,6 +70,10 @@ class KebabDTO
             'network' => $this->network,
             'app_link' => $this->appLink,
             'website_link' => $this->websiteLink,
+            'has_glovo' => $this->hasGlovo,
+            'has_pyszne' => $this->hasPyszne,
+            'has_ubereats' => $this->hasUberEats,
+            'phone_number' => $this->phoneNumber,
         ];
     }
 }
