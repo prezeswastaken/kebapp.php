@@ -18,14 +18,18 @@ return new class extends Migration
             $table->string('address');
             $table->bigInteger('coordinates_x');
             $table->bigInteger('coordinates_y');
-            $table->string('opening_year')->nullable();
-            $table->string('closing_year')->nullable();
+            $table->bigInteger('opening_year')->nullable();
+            $table->bigInteger('closing_year')->nullable();
             $table->string('status');
             $table->boolean('is_kraft');
             $table->boolean('is_food_truck');
             $table->string('network')->nullable();
             $table->string('app_link')->nullable();
             $table->string('website_link')->nullable();
+            $table->boolean('has_glovo')->default(false);
+            $table->boolean('has_pyszne')->default(false);
+            $table->boolean('has_ubereats')->default(false);
+            $table->string('phone_number')->nullable();
             $table->timestamps();
         });
     }

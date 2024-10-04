@@ -16,6 +16,9 @@ class Kebab extends Model
             'is_kraft' => 'boolean',
             'is_food_truck' => 'boolean',
             'status' => KebabStatusCast::class,
+            'has_glovo' => 'boolean',
+            'has_pyszne' => 'boolean',
+            'has_ubereats' => 'boolean',
         ];
     }
 
@@ -33,11 +36,6 @@ class Kebab extends Model
 
     public function openingHours()
     {
-        return $this->hasMany(OpeningHoursDay::class);
-    }
-
-    public function getOpeningHoursAttribute()
-    {
-        return $this->openingHours;
+        return $this->hasMany(OpeningHoursDay::class, 'kebab_id', 'id');
     }
 }
