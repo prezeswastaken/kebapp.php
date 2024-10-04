@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\DTOs;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -47,20 +47,6 @@ class KebabDTO
         );
     }
 
-    //     'name' => ['required', 'string', 'max:255'],
-    // 'logo' => ['image', 'nullable'],
-    // 'address' => ['required', 'string', 'max:255'],
-    // 'coordinatesX' => ['required', 'numeric'],
-    // 'coordinatesY' => ['required', 'numeric'],
-    // 'openingYear' => ['nullable', 'int'],
-    // 'closingYear' => ['nullable', 'int'],
-    // 'status' => ['required', 'string', 'max:255'],
-    // 'isKraft' => ['required', 'boolean'],
-    // 'isFoodTruck' => ['required', 'boolean'],
-    // 'network' => ['nullable', 'string', 'max:255'],
-    // 'appLink' => ['nullable', 'string', 'max:255'],
-    // 'websiteLink' => ['nullable', 'string', 'max:255'],
-    //
     public function toCreateData(): array
     {
         return [

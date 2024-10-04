@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions;
 
-use App\KebabDTO;
+use App\DTOs\KebabDTO;
 use App\Models\Kebab;
 
 class StoreKebabAction

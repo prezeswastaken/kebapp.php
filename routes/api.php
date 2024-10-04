@@ -19,6 +19,6 @@ Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
     Route::get('admin', function () {
         return response()->json(['message' => 'Hello Admin']);
     });
+    Route::post('kebabs', [App\Http\Controllers\KebabController::class, 'store']);
 
 });
-Route::post('kebabs', [App\Http\Controllers\KebabController::class, 'store']);

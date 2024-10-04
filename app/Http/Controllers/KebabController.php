@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\StoreKebabAction;
+use App\Actions\StoreOpeningHoursAction;
+use App\DTOs\KebabDTO;
+use App\DTOs\OpeningHoursDTO;
 use App\Http\Requests\StoreKebabRequest;
 use App\Http\Resources\KebabResource;
-use App\KebabDTO;
 use App\Models\Kebab;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,10 +27,13 @@ class KebabController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreKebabRequest $request, StoreKebabAction $action): JsonResponse
+    public function store(StoreKebabRequest $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction): JsonResponse
     {
         $kebabDTO = KebabDTO::fromRequest($request);
         $result = $action->handle($kebabDTO);
+
+        $openingHoursDTO = OpeningHoursDTO::make($request->all(), $result->id);
+        $storeOpeningHoursAction->handle($openingHoursDTO);
 
         return response()->json(KebabResource::make($result), 201);
     }
