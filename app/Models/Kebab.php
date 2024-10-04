@@ -33,11 +33,6 @@ class Kebab extends Model
 
     public function openingHours()
     {
-        return $this->hasMany(OpeningHoursDay::class);
-    }
-
-    public function getOpeningHoursAttribute()
-    {
-        return $this->openingHours;
+        return $this->hasMany(OpeningHoursDay::class, 'kebab_id', 'id');
     }
 }
