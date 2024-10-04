@@ -8,6 +8,7 @@ use App\Actions\StoreKebabAction;
 use App\Actions\StoreOpeningHoursAction;
 use App\DTOs\KebabDTO;
 use App\DTOs\OpeningHoursDTO;
+use App\Http\Requests\StoreKebabRequest;
 use App\Http\Resources\KebabResource;
 use App\Models\Kebab;
 use Illuminate\Http\JsonResponse;
@@ -27,9 +28,8 @@ class KebabController extends Controller
         return KebabResource::collection(Kebab::with('openingHours')->orderBy('id', 'desc')->get());
     }
 
-    public function store(Request $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction): JsonResponse
+    public function store(StoreKebabRequest $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction): JsonResponse
     {
-        return response()->json($request->all());
         $kebabDTO = KebabDTO::fromRequest($request);
         $result = $action->handle($kebabDTO);
 
