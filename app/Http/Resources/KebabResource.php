@@ -12,19 +12,6 @@ class KebabResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    //     public readonly string $name,
-    //     public readonly ?UploadedFile $logo,
-    //     public readonly string $address,
-    //     public readonly float|string $coordinatesX,
-    //     public readonly float|string $coordinatesY,
-    //     public readonly ?int $openingYear,
-    //     public readonly ?int $closingYear,
-    //     public readonly string $status,
-    //     public readonly bool|string $isKraft,
-    //     public readonly bool|string $isFoodTruck,
-    //     public readonly ?string $network,
-    //     public readonly ?string $appLink,
-    //     public readonly ?string $websiteLink,
     public function toArray(Request $request): array
     {
         return [
@@ -42,6 +29,7 @@ class KebabResource extends JsonResource
             'network' => $this->network,
             'appLink' => $this->app_link,
             'websiteLink' => $this->website_link,
+            'openingHours' => OpeningHoursDayResource::collection($this->whenLoaded('openingHours')),
         ];
     }
 }

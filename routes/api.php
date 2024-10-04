@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [App\Http\Controllers\AuthController::class, 'login']);
 Route::post('register', [App\Http\Controllers\AuthController::class, 'register']);
 
+Route::get('kebabs/paginated', [App\Http\Controllers\KebabController::class, 'paginated']);
 Route::get('kebabs', [App\Http\Controllers\KebabController::class, 'index']);
 
 Route::middleware([AuthOnly::class])->group(function () {

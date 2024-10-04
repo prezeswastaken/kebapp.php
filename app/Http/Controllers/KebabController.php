@@ -16,12 +16,16 @@ use Illuminate\Http\Request;
 
 class KebabController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function paginated()
+    {
+        $perPage = request()->get('perPage', 10);
+
+        return KebabResource::collection(Kebab::with('openingHours')->orderBy('id', 'desc')->paginate($perPage));
+    }
+
     public function index()
     {
-        return KebabResource::collection(Kebab::orderBy('id', 'desc')->get());
+        return KebabResource::collection(Kebab::with('openingHours')->orderBy('id', 'desc')->get());
     }
 
     /**
