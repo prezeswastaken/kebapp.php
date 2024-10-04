@@ -29,7 +29,7 @@ class KebabController extends Controller
 
     public function store(Request $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction): JsonResponse
     {
-        dd($request->all());
+        return response()->json($request->all());
         $kebabDTO = KebabDTO::fromRequest($request);
         $result = $action->handle($kebabDTO);
 
