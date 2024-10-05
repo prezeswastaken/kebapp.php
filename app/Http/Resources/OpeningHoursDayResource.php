@@ -16,7 +16,6 @@ class OpeningHoursDayResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'weekDay' => $this->week_day,
             'opensAt' => Carbon::parse($this->opens_at)->format('H:i'),
             'closesAt' => Carbon::parse($this->closes_at)->format('H:i'),
