@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\URL;
 
 class StoreLogoAction
 {
-    public function handle(Kebab $kebab, UploadedFile $file)
+    public function handle(Kebab $kebab, UploadedFile $file): void
     {
         if (isset($kebab->logo_url)) {
             $this->deleteOldLogoFile($kebab->logo_url);
