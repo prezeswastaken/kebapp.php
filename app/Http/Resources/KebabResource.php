@@ -33,6 +33,7 @@ class KebabResource extends JsonResource
             'hasPyszne' => $this->has_pyszne,
             'hasUberEats' => $this->has_ubereats,
             'phoneNumber' => $this->phone_number,
+            'meatTypes' => MeatTypeResource::collection($this->whenLoaded('meatTypes')),
             'openingHours' => OpeningHoursDayResource::collection($this->whenLoaded('openingHours')),
         ];
     }

@@ -30,6 +30,7 @@ class KebabDTO
         public readonly bool $hasPyszne,
         public readonly bool $hasUberEats,
         public readonly ?string $phoneNumber,
+        public readonly array $meatTypeIds,
     ) {}
 
     public static function fromRequest(Request $request): self
@@ -52,6 +53,7 @@ class KebabDTO
             $request->input('hasPyszne') ?? false,
             $request->input('hasUberEats') ?? false,
             $request->input('phoneNumber'),
+            $request->input('meatTypeIds'),
         );
     }
 
