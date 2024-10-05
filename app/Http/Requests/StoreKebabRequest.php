@@ -25,7 +25,6 @@ class StoreKebabRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'max:255'],
-            'logo' => ['image', 'nullable'],
             'address' => ['required', 'string', 'max:255'],
             'coordinatesX' => ['required', 'numeric'],
             'coordinatesY' => ['required', 'numeric'],
