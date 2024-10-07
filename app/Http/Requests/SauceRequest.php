@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Requests;
@@ -24,7 +23,7 @@ class SauceRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'isSpicy' => ['boolean'],
+            'isSpicy' => ['required', 'boolean'],
         ];
     }
 }
