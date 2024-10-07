@@ -56,6 +56,8 @@ class StoreKebabRequest extends FormRequest
             'sundayClosesAt' => ['nullable', new TimeFormat, 'max:255'],
             'meatTypeIds' => ['required', 'array'],
             'meatTypeIds.*' => ['integer', 'exists:meat_types,id'],
+            'sauceIds' => ['required', 'array'],
+            'sauceTypeIds.*' => ['integer', 'exists:meat_types,id'],
         ];
     }
 }
