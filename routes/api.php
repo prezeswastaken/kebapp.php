@@ -10,7 +10,9 @@ Route::post('register', [App\Http\Controllers\AuthController::class, 'register']
 Route::get('kebabs/paginated', [App\Http\Controllers\KebabController::class, 'paginated']);
 Route::get('kebabs', [App\Http\Controllers\KebabController::class, 'index']);
 Route::get('kebabs/{kebab}', [App\Http\Controllers\KebabController::class, 'show']);
+
 Route::apiResource('meat-types', App\Http\Controllers\MeatTypeController::class)->only('index', 'show');
+Route::apiResource('sauces', App\Http\Controllers\SauceController::class)->only('index', 'show');
 
 Route::middleware([AuthOnly::class])->group(function () {
     Route::get('me', [App\Http\Controllers\AuthController::class, 'me']);
@@ -24,5 +26,6 @@ Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
     Route::post('kebabs/{kebab}/logo', [App\Http\Controllers\StoreLogoController::class, 'store']);
 
     Route::apiResource('meat-types', App\Http\Controllers\MeatTypeController::class)->except('index', 'show');
+    Route::apiResource('sauces', App\Http\Controllers\SauceController::class)->except('index', 'show');
 
 });

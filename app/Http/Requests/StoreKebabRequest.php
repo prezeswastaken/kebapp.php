@@ -57,7 +57,7 @@ class StoreKebabRequest extends FormRequest
             'meatTypeIds' => ['required', 'array'],
             'meatTypeIds.*' => ['integer', 'exists:meat_types,id'],
             'sauceIds' => ['required', 'array'],
-            'sauceTypeIds.*' => ['integer', 'exists:meat_types,id'],
+            'sauceIds.*' => ['integer', 'exists:sauces,id'],
         ];
     }
 }
