@@ -43,7 +43,7 @@ class KebabController extends Controller
         AdminLog::create([
             'user_name' => $user->name,
             'method' => 'POST',
-            'action_name' => "Added $result->name",
+            'action_name' => "Added kebab $result->name",
         ]);
 
         return response()->json(KebabResource::make($result), 201);
@@ -68,7 +68,7 @@ class KebabController extends Controller
         AdminLog::create([
             'user_name' => $user->name,
             'method' => 'DELETE',
-            'action_name' => "Deleted $kebab->name",
+            'action_name' => "Deleted kebab $kebab->name",
         ]);
 
         return response()->json(null, 204);
