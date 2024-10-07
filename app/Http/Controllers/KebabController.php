@@ -10,7 +10,10 @@ use App\DTOs\KebabDTO;
 use App\DTOs\OpeningHoursDTO;
 use App\Http\Requests\StoreKebabRequest;
 use App\Http\Resources\KebabResource;
+use App\Models\AdminLog;
 use App\Models\Kebab;
+use App\Models\User;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -28,7 +31,7 @@ class KebabController extends Controller
         return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces'])->orderBy('id', 'desc')->get());
     }
 
-    public function store(StoreKebabRequest $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction): JsonResponse
+    public function store(StoreKebabRequest $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction, #[CurrentUser] User $user): JsonResponse
     {
         $kebabDTO = KebabDTO::fromRequest($request);
         $result = $action->handle($kebabDTO);
@@ -36,6 +39,12 @@ class KebabController extends Controller
         $openingHoursDTO = OpeningHoursDTO::make($request->all(), $result->id);
         $storeOpeningHoursAction->handle($openingHoursDTO);
         $result->load('openingHours');
+
+        AdminLog::create([
+            'user_name' => $user->name,
+            'method' => 'POST',
+            'action_name' => "Added kebab $result->name",
+        ]);
 
         return response()->json(KebabResource::make($result), 201);
     }
@@ -52,9 +61,15 @@ class KebabController extends Controller
         //
     }
 
-    public function destroy(Kebab $kebab)
+    public function destroy(Kebab $kebab, #[CurrentUser] User $user)
     {
         $kebab->delete();
+
+        AdminLog::create([
+            'user_name' => $user->name,
+            'method' => 'DELETE',
+            'action_name' => "Deleted kebab $kebab->name",
+        ]);
 
         return response()->json(null, 204);
     }

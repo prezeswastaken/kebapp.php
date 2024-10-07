@@ -28,4 +28,6 @@ Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
     Route::apiResource('meat-types', App\Http\Controllers\MeatTypeController::class)->except('index', 'show');
     Route::apiResource('sauces', App\Http\Controllers\SauceController::class)->except('index', 'show');
 
+    Route::get('admin-logs', [App\Http\Controllers\AdminLogController::class, 'index']);
+
 });
