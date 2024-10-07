@@ -31,6 +31,7 @@ class KebabDTO
         public readonly bool $hasUberEats,
         public readonly ?string $phoneNumber,
         public readonly array $meatTypeIds,
+        public readonly array $sauceIds,
     ) {}
 
     public static function fromRequest(Request $request): self
@@ -54,6 +55,7 @@ class KebabDTO
             $request->input('hasUberEats') ?? false,
             $request->input('phoneNumber'),
             $request->input('meatTypeIds'),
+            $request->input('sauceIds'),
         );
     }
 
