@@ -17,8 +17,8 @@ class StoreKebabAction
         $result->refresh();
 
         $result->meatTypes()->attach($kebabDTO->meatTypeIds);
-        // $kebab->sauces()->attach($kebabDTO->sauces);
-        $result->load('meatTypes');
+        $result->sauces()->attach($kebabDTO->sauceIds);
+        $result->load(['meatTypes', 'sauces']);
 
         return $result;
     }
