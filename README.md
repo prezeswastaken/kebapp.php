@@ -54,6 +54,5 @@ szczegółowe o danym miejscu
 ### 12.1. Konto administratora tworzone jest podczas instalacji systemu
 ### 12.2. Przy pierwszym logowaniu administrator musi stworzyć sobie hasło
 ## 13. Administrator widzi listę zgłoszonych sugestii i akceptuje je lub odrzuca
-## 14. Aplikacja mobilna korzysta z REST API panelu administracyjnego, które jest opisane
-przez dokumentację OpenAPI wystawioną w endpoincie /api/documentation
+## 14. Aplikacja mobilna korzysta z REST API panelu administracyjnego, które jest opisane przez dokumentację OpenAPI wystawioną w endpoincie /api/documentation
 ## 15. System posiada zmigrowane dane nt. legnickich kebabów
