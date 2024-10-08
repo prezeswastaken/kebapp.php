@@ -5,7 +5,7 @@
 ![GitHub Created At](https://img.shields.io/github/created-at/prezeswastaken/kebapp.php)
 ![GitHub top language](https://img.shields.io/github/languages/top/prezeswastaken/kebapp.php)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/prezeswastaken/kebapp.php)
-![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-closed/prezeswastaken/kebapp.php)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-closed/prezeswastaken/kebapp.php?color=%23008000)
 
 
 <img src="https://i.imgur.com/e6Aom8n.jpeg" alt="Description" width="200"/>
