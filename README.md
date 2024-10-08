@@ -28,14 +28,13 @@ szczegółowe o danym miejscu
 - 4.5. rok otwarcia i zamknięcia (jeżeli informacje są znane)
 ## 5. Każdy kebab powinien mieć przypisane informacje dodatkowe:
 - 5.1. godziny otwarcia w poszczególnych dniach tygodnia
-- 5.2. dostępne rodzaje mięs (kurczak, wołowina, baranina, falafel itp.)
-- 5.3. dostępne sosy (czosnkowy, ostry itp.)
+- 5.2. dostępne rodzaje mięs
+- 5.3. dostępne sosy
 - 5.4. informację nt. statusu (punkt 3 OPZ)
 - 5.5. informację czy kebab jest "kraftowy"
 - 5.6. informację czy kebab jest ulokowany w nieruchomości, czy w "budzie"
 - 5.7. informację czy kebab jest oddziałem sieci kebabów
-- 5.8. informację jak można zamówić kebab (telefon, Pyszne, Glovo, Uber Eats,
-własna aplikacja/strona)
+- 5.8. informację jak można zamówić kebab (telefon, Pyszne, Glovo, Uber Eats, własna aplikacja/strona)
 
 ## 6. Informacje z punktów 5.1-5.8 OPZ powinny być bazą dla filtrów z punktu 2.1
 ## 7. Informacje z punktów 4.1, 4.5, 8 OPZ powinny być bazą dla sortowań z punktu 2.1
