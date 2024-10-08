@@ -37,7 +37,7 @@ class AdminMessageController extends Controller
 
     public function accept(AdminMessage $message, #[CurrentUser] User $user)
     {
-        $message->update(['is_accepted' => true]);
+        $message->update(['is_accepted' => ! $message->is_accepted]);
         $message->load('user');
 
         AdminLog::create([
