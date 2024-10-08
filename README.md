@@ -1,66 +1,51 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Kebapp - interaktywna mapa kebabów w Legnicy
+<img src="https://i.imgur.com/e6Aom8n.jpeg" alt="Description" width="200"/>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Wymagania funkcjonalne
+## 1. Użytkownik może pobrać aplikację na systemy Android i iOS
+## 2. Użytkownik aplikacji mobilnej może zobaczyć listę legnickich kebabów
+- 2.1. Lista w formie tabeli jest paginowana, sortowalna i filtrowalna
+- 2.2. Lista w formie mapy jest interaktywna
+- 2.3. Kliknięcie na miejsce (zarówno na liście, jak i na mapie) otwiera informacje
+szczegółowe o danym miejscu
 
-## About Laravel
+## 3. Lista obejmuje kebaby obecnie działające, zamknięte oraz planowane
+## 4. Każdy kebab powinien mieć przypisane informacje podstawowe:
+- 4.1. nazwę
+- 4.2. logo
+- 4.3. adres
+- 4.4. koordynaty geograficzne
+- 4.5. rok otwarcia i zamknięcia (jeżeli informacje są znane)
+## 5. Każdy kebab powinien mieć przypisane informacje dodatkowe:
+- 5.1. godziny otwarcia w poszczególnych dniach tygodnia
+- 5.2. dostępne rodzaje mięs (kurczak, wołowina, baranina, falafel itp.)
+- 5.3. dostępne sosy (czosnkowy, ostry itp.)
+- 5.4. informację nt. statusu (punkt 3 OPZ)
+- 5.5. informację czy kebab jest "kraftowy"
+- 5.6. informację czy kebab jest ulokowany w nieruchomości, czy w "budzie"
+- 5.7. informację czy kebab jest oddziałem sieci kebabów
+- 5.8. informację jak można zamówić kebab (telefon, Pyszne, Glovo, Uber Eats,
+własna aplikacja/strona)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 6. Informacje z punktów 5.1-5.8 OPZ powinny być bazą dla filtrów z punktu 2.1
+## 7. Informacje z punktów 4.1, 4.5, 8 OPZ powinny być bazą dla sortowań z punktu 2.1
+## 8. Każdy kebab powinien mieć przypisane oceny z Google i Pyszne.pl, jeżeli mają tam konta
+- 8.1. Informacje te są pobierane z właściwych serwisów przynajmniej raz dziennie
+## 9. Każdy kebab powinien mieć przypisane linki do social media (Facebook, Instagram,
+własna strona www)
+## 10. Użytkownik widzi liczbę kebabów obecnych na mapie w aplikacji mobilnej
+## 11. Użytkownik może zalogować się w aplikacji mobilnej
+- 11.1. Zalogowany użytkownik może dodawać kebaby do ulubionych
+- 11.2. Zalogowany użytkownik może komentować kebaby
+- 11.3. Zalogowany użytkownik może przesyłać administratorowi sugestię dotyczącą zmian danych
+    - 11.3.1 Sugestia wysyłana jest w formie tekstu, który pełni rolę sugestii bądź prośby
+    - 11.3.2 Admin może wyświetlić wszystkie sugestie
+    - 11.3.3 Admin może zaakceptować sugestię, bądź ją usunąć
+    - 11.3.4 Zaakceptowana sugestia zostaje automatycznie usunięta po 5 dniach od akceptacji
+## 12. Administrator zarządza bazą kebabów poprzez dedykowany panel administracyjny
+### 12.1. Konto administratora tworzone jest podczas instalacji systemu
+### 12.2. Przy pierwszym logowaniu administrator musi stworzyć sobie hasło
+## 13. Administrator widzi listę zgłoszonych sugestii i akceptuje je lub odrzuca
+## 14. Aplikacja mobilna korzysta z REST API panelu administracyjnego, które jest opisane
+przez dokumentację OpenAPI wystawioną w endpoincie /api/documentation
+## 15. System posiada zmigrowane dane nt. legnickich kebabów
