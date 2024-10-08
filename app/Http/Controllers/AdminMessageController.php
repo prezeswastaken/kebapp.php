@@ -39,11 +39,14 @@ class AdminMessageController extends Controller
     {
         $message->update(['is_accepted' => ! $message->is_accepted]);
         $message->load('user');
+        $message->refresh();
 
+        $username = $message->user->name;
+        $action = $message->is_accepted ? 'Zaakceptował wiadomość' : 'Odrzucił akceptację wiadomości';
         AdminLog::create([
             'user_name' => $user->name,
             'method' => 'POST',
-            'action_name' => "Zaakceptował wiadomość od $message->user->name",
+            'action_name' => "$action od $username",
         ]);
 
         return response()->json(AdminMessageResource::make($message));
