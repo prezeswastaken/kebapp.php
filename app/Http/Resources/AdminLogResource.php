@@ -17,7 +17,7 @@ class AdminLogResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'userName' => $this->user_name,
+            'userName' => $this->user->name,
             'method' => $this->method,
             'actionName' => $this->action_name,
             'creationHour' => Carbon::parse($this->created_at)->format('H:i'),
