@@ -41,8 +41,7 @@ własna aplikacja/strona)
 ## 7. Informacje z punktów 4.1, 4.5, 8 OPZ powinny być bazą dla sortowań z punktu 2.1
 ## 8. Każdy kebab powinien mieć przypisane oceny z Google i Pyszne.pl, jeżeli mają tam konta
 - 8.1. Informacje te są pobierane z właściwych serwisów przynajmniej raz dziennie
-## 9. Każdy kebab powinien mieć przypisane linki do social media (Facebook, Instagram,
-własna strona www)
+## 9. Każdy kebab powinien mieć przypisane linki do social media (Facebook, Instagram, własna strona www)
 ## 10. Użytkownik widzi liczbę kebabów obecnych na mapie w aplikacji mobilnej
 ## 11. Użytkownik może zalogować się w aplikacji mobilnej
 - 11.1. Zalogowany użytkownik może dodawać kebaby do ulubionych
