@@ -18,6 +18,8 @@ Route::middleware([AuthOnly::class])->group(function () {
     Route::get('me', [App\Http\Controllers\AuthController::class, 'me']);
     Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
+
+    Route::post('admin-messages', [App\Http\Controllers\AdminMessageController::class, 'store']);
 });
 
 Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
@@ -29,5 +31,8 @@ Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
     Route::apiResource('sauces', App\Http\Controllers\SauceController::class)->except('index', 'show');
 
     Route::get('admin-logs', [App\Http\Controllers\AdminLogController::class, 'index']);
+    Route::post('admin-messages/{message}/accept', [App\Http\Controllers\AdminMessageController::class, 'accept']);
+    Route::get('admin-messages', [App\Http\Controllers\AdminMessageController::class, 'index']);
+    Route::delete('admin-messages/{message}', [App\Http\Controllers\AdminMessageController::class, 'delete']);
 
 });
