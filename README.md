@@ -1,4 +1,14 @@
 # Kebapp - interaktywna mapa kebabów w Legnicy
+
+!GitHub Stats
+!GitHub Streak
+!Top Languages
+
+!GitHub stars
+!GitHub forks
+!GitHub issues
+!Profile Views
+
 <img src="https://i.imgur.com/e6Aom8n.jpeg" alt="Description" width="200"/>
 
 # Wymagania funkcjonalne
