@@ -2,7 +2,7 @@
 <img src="https://i.imgur.com/e6Aom8n.jpeg" alt="Description" width="200"/>
 
 # Wymagania funkcjonalne
-## 1. Użytkownik może pobrać aplikację na systemy Android i iOS
+## 1. Użytkownik może pobrać aplikację na systemy Android
 ## 2. Użytkownik aplikacji mobilnej może zobaczyć listę legnickich kebabów
 - 2.1. Lista w formie tabeli jest paginowana, sortowalna i filtrowalna
 - 2.2. Lista w formie mapy jest interaktywna
