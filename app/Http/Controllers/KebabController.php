@@ -57,9 +57,24 @@ class KebabController extends Controller
         return response()->json(KebabResource::make($kebab));
     }
 
-    public function update(StoreKebabRequest $request, Kebab $kebab, UpdateKebabAction $updateKebabAction)
-    {
+    public function update(
+        StoreKebabRequest $request,
+        Kebab $kebab,
+        UpdateKebabAction $updateKebabAction,
+        StoreOpeningHoursAction $storeOpeningHoursAction,
+    ) {
         $result = $updateKebabAction->handle(KebabDTO::fromRequest($request), $kebab->id);
+
+        $kebab->openingHours()->delete();
+        $openingHoursDTO = OpeningHoursDTO::make($request->all(), $result->id);
+        $storeOpeningHoursAction->handle($openingHoursDTO);
+        $result->load('openingHours');
+
+        AdminLog::create([
+            'user_name' => $request->user()->name,
+            'method' => 'PUT',
+            'action_name' => "Updated kebab $result->name",
+        ]);
 
         return response()->json(KebabResource::make($result));
     }
