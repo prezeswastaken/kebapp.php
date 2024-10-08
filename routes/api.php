@@ -26,6 +26,7 @@ Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
     Route::post('kebabs', [App\Http\Controllers\KebabController::class, 'store']);
     Route::delete('kebabs/{kebab}', [App\Http\Controllers\KebabController::class, 'destroy']);
     Route::post('kebabs/{kebab}/logo', [App\Http\Controllers\StoreLogoController::class, 'store']);
+    Route::put('kebabs/{kebab}', [App\Http\Controllers\KebabController::class, 'update']);
 
     Route::apiResource('meat-types', App\Http\Controllers\MeatTypeController::class)->except('index', 'show');
     Route::apiResource('sauces', App\Http\Controllers\SauceController::class)->except('index', 'show');

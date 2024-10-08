@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\StoreKebabAction;
 use App\Actions\StoreOpeningHoursAction;
+use App\Actions\UpdateKebabAction;
 use App\DTOs\KebabDTO;
 use App\DTOs\OpeningHoursDTO;
 use App\Http\Requests\StoreKebabRequest;
@@ -56,9 +57,26 @@ class KebabController extends Controller
         return response()->json(KebabResource::make($kebab));
     }
 
-    public function update(Request $request, Kebab $kebab)
-    {
-        //
+    public function update(
+        StoreKebabRequest $request,
+        Kebab $kebab,
+        UpdateKebabAction $updateKebabAction,
+        StoreOpeningHoursAction $storeOpeningHoursAction,
+    ) {
+        $result = $updateKebabAction->handle(KebabDTO::fromRequest($request), $kebab->id);
+
+        $kebab->openingHours()->delete();
+        $openingHoursDTO = OpeningHoursDTO::make($request->all(), $result->id);
+        $storeOpeningHoursAction->handle($openingHoursDTO);
+        $result->load('openingHours');
+
+        AdminLog::create([
+            'user_name' => $request->user()->name,
+            'method' => 'PUT',
+            'action_name' => "Updated kebab $result->name",
+        ]);
+
+        return response()->json(KebabResource::make($result));
     }
 
     public function destroy(Kebab $kebab, #[CurrentUser] User $user)
