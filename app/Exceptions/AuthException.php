@@ -13,4 +13,9 @@ class AuthException extends AppException
     {
         return new self('Unauthorized! You need to be an admin to access this resource.', 403);
     }
+
+    public static function forbidden(): self
+    {
+        return new self("You can't do that!", 403);
+    }
 }
