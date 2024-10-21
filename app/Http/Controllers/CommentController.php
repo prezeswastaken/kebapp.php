@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\AuthException;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Models\AdminLog;
 use App\Models\Comment;
 use App\Models\Kebab;
 use App\Models\User;
@@ -63,6 +65,20 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        if ($this->user->id !== $comment->user_id && ! $this->user->is_admin) {
+            throw AuthException::forbidden();
+        }
+
+        $comment->load('kebab:id');
+        $comment->delete();
+        $kebabId = $comment->kebab->id;
+
+        AdminLog::create([
+            'user_name' => $this->user->name,
+            'method' => 'DELETE',
+            'action_name' => "Deleted comment from kebab $kebabId",
+        ]);
+
+        return response()->json(null, 204);
     }
 }

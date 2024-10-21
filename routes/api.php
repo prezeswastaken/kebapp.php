@@ -26,6 +26,7 @@ Route::middleware([AuthOnly::class])->group(function () {
     Route::post('like/kebab/{kebab}', LikeController::class);
 
     Route::post('comment/kebab/{kebab}', [CommentController::class, 'store']);
+    Route::delete('comment/{comment}', [CommentController::class, 'destroy']);
 });
 
 Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
