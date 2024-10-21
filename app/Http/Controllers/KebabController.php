@@ -52,7 +52,7 @@ class KebabController extends Controller
 
     public function show(Kebab $kebab)
     {
-        $kebab->load(['openingHours', 'meatTypes', 'sauces', 'likes']);
+        $kebab->load(['openingHours', 'meatTypes', 'sauces', 'likes', 'comments.user']);
 
         return response()->json(KebabResource::make($kebab));
     }

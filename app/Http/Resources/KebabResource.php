@@ -37,6 +37,7 @@ class KebabResource extends JsonResource
             'meatTypes' => MeatTypeResource::collection($this->whenLoaded('meatTypes')),
             'sauces' => SauceResource::collection($this->whenLoaded('sauces')),
             'openingHours' => OpeningHoursDayResource::collection($this->whenLoaded('openingHours')),
+            'comments' => CommentResource::collection($this->whenLoaded('comments')),
         ];
     }
 }
