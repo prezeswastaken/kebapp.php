@@ -68,4 +68,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Kebab::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

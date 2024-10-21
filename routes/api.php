@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\AuthOnly;
@@ -23,6 +24,8 @@ Route::middleware([AuthOnly::class])->group(function () {
     Route::post('admin-messages', [App\Http\Controllers\AdminMessageController::class, 'store']);
 
     Route::post('like/kebab/{kebab}', LikeController::class);
+
+    Route::post('comment/kebab/{kebab}', [CommentController::class, 'store']);
 });
 
 Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
