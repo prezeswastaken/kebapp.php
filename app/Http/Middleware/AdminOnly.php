@@ -16,8 +16,13 @@ class AdminOnly
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() === null || ! $request->user()->is_admin) {
+        $user = $request->user();
+        if ($user === null || ! $user->is_admin) {
             throw AuthException::adminOnly();
+        }
+
+        if ($user->must_change_password) {
+            throw AuthException::mustChangePassword();
         }
 
         return $next($request);
