@@ -33,6 +33,13 @@ class CommentController extends Controller
             'kebab_id' => $kebab->id,
         ]);
 
+        $kebabName = $kebab->name;
+        AdminLog::create([
+            'user_name' => $this->user->name,
+            'method' => 'POST',
+            'action_name' => "Added a comment for kebab $kebabName",
+        ]);
+
         return response()->json($comment);
     }
 
