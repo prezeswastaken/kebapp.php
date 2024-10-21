@@ -26,7 +26,7 @@ class AuthTest extends TestCase
 
         $this->assertDatabaseHas('users', ['email' => $userData['email'], 'name' => $userData['name']]);
 
-        $response->assertJsonStructure(['access_token', 'token_type', 'expires_in', 'user']);
+        $response->assertJsonStructure(['accessToken', 'tokenType', 'expiresIn', 'user']);
     }
 
     public function test_user_cannot_register_with_existing_email(): void
@@ -52,9 +52,9 @@ class AuthTest extends TestCase
         User::create($userData);
         $token_response = $this->post('/api/login', $userData);
         $token_response->assertStatus(200);
-        $token_response->assertJsonStructure(['access_token', 'token_type', 'expires_in', 'user']);
+        $token_response->assertJsonStructure(['accessToken', 'tokenType', 'expiresIn', 'user']);
 
-        $token = $token_response->json('access_token');
+        $token = $token_response->json('accessToken');
         $refresh_response = $this->post('/api/refresh', [], ['Authorization' => 'Bearer '.$token]);
 
         $refresh_response->assertStatus(200);

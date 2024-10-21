@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Kebab;
 use Illuminate\Database\Seeder;
 
 class KebabSeeder extends Seeder
@@ -12,6 +12,6 @@ class KebabSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Kebab::factory()->count(10)->create();
     }
 }

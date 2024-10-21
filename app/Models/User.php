@@ -63,4 +63,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(AdminMessage::class);
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Kebab::class);
+    }
 }

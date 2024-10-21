@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LikeController;
 use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\AuthOnly;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ Route::middleware([AuthOnly::class])->group(function () {
     Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
 
     Route::post('admin-messages', [App\Http\Controllers\AdminMessageController::class, 'store']);
+
+    Route::post('like/kebab/{kebab}', LikeController::class);
 });
 
 Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
