@@ -39,7 +39,7 @@ class Kebab extends Model
         return $this->hasMany(OpeningHoursDay::class, 'kebab_id', 'id');
     }
 
-    public function usersThatlike()
+    public function likes()
     {
         return $this->belongsToMany(User::class);
     }

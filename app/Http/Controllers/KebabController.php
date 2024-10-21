@@ -24,12 +24,12 @@ class KebabController extends Controller
     {
         $perPage = $request->get('perPage', 10);
 
-        return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces'])->orderBy('id', 'desc')->paginate($perPage));
+        return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])->orderBy('id', 'desc')->paginate($perPage));
     }
 
     public function index()
     {
-        return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces'])->orderBy('id', 'desc')->get());
+        return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])->orderBy('id', 'desc')->get());
     }
 
     public function store(StoreKebabRequest $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction, #[CurrentUser] User $user): JsonResponse
@@ -52,7 +52,7 @@ class KebabController extends Controller
 
     public function show(Kebab $kebab)
     {
-        $kebab->load(['openingHours', 'meatTypes', 'sauces']);
+        $kebab->load(['openingHours', 'meatTypes', 'sauces', 'likes']);
 
         return response()->json(KebabResource::make($kebab));
     }
