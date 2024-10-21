@@ -69,14 +69,14 @@ class CommentController extends Controller
             throw AuthException::forbidden();
         }
 
-        $comment->load('kebab:id');
+        $comment->load('kebab:name,id');
         $comment->delete();
-        $kebabId = $comment->kebab->id;
+        $kebabName = $comment->kebab->name;
 
         AdminLog::create([
             'user_name' => $this->user->name,
             'method' => 'DELETE',
-            'action_name' => "Deleted comment from kebab $kebabId",
+            'action_name' => "Deleted comment from kebab $kebabName",
         ]);
 
         return response()->json(null, 204);
