@@ -56,6 +56,7 @@ class User extends Authenticatable implements JWTSubject
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_admin' => 'boolean',
+            'must_change_password' => 'boolean',
         ];
     }
 

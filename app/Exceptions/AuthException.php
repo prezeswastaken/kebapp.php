@@ -18,4 +18,14 @@ class AuthException extends AppException
     {
         return new self("You can't do that!", 403);
     }
+
+    public static function mustChangePassword(): self
+    {
+        return new self('You have to change your password', 403);
+    }
+
+    public static function incorrectOldPassword(): self
+    {
+        return new self('Your old password you provided is incorrect', 403);
+    }
 }

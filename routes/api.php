@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\AuthOnly;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::middleware([AuthOnly::class])->group(function () {
 
     Route::post('comment/kebab/{kebab}', [CommentController::class, 'store']);
     Route::delete('comment/{comment}', [CommentController::class, 'destroy']);
+
+    Route::post('password-update', UpdatePasswordController::class);
 });
 
 Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
