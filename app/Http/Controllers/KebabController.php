@@ -22,14 +22,14 @@ use Illuminate\Http\Request;
 
 class KebabController extends Controller
 {
-    public function paginated(Request $request)
+    public function paginated(Request $request, GetSortedFilteredKebabsAction $action)
     {
         $perPage = $request->get('perPage', 10);
 
+        $params = KebabSortFilterParams::fromRequest($request);
+
         return KebabResource::collection(
-            Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])
-                ->orderBy('id', 'desc')
-                ->paginate($perPage)
+            $action->handle($params)->paginate($perPage)
         );
     }
 
