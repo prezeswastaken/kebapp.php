@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Actions\GetSortedFilteredKebabsAction;
 use App\Actions\StoreKebabAction;
 use App\Actions\StoreOpeningHoursAction;
 use App\Actions\UpdateKebabAction;
@@ -14,6 +15,7 @@ use App\Http\Resources\KebabResource;
 use App\Models\AdminLog;
 use App\Models\Kebab;
 use App\Models\User;
+use App\ValueObjects\KebabSortFilterParams;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,16 +26,28 @@ class KebabController extends Controller
     {
         $perPage = $request->get('perPage', 10);
 
-        return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])->orderBy('id', 'desc')->paginate($perPage));
+        return KebabResource::collection(
+            Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])
+                ->orderBy('id', 'desc')
+                ->paginate($perPage)
+        );
     }
 
-    public function index()
+    public function index(Request $request, GetSortedFilteredKebabsAction $action)
     {
-        return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])->orderBy('id', 'desc')->get());
+        $params = KebabSortFilterParams::fromRequest($request);
+
+        return KebabResource::collection(
+            $action->handle($params)->get()
+        );
     }
 
-    public function store(StoreKebabRequest $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction, #[CurrentUser] User $user): JsonResponse
-    {
+    public function store(
+        StoreKebabRequest $request,
+        StoreKebabAction $action,
+        StoreOpeningHoursAction $storeOpeningHoursAction,
+        #[CurrentUser] User $user,
+    ): JsonResponse {
         $kebabDTO = KebabDTO::fromRequest($request);
         $result = $action->handle($kebabDTO);
 
