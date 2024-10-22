@@ -26,6 +26,6 @@ class AuthException extends AppException
 
     public static function incorrectOldPassword(): self
     {
-        return new self('Your old password you provided is incorrect');
+        return new self('Your old password you provided is incorrect', 403);
     }
 }

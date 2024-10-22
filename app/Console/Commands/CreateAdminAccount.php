@@ -13,7 +13,7 @@ class CreateAdminAccount extends Command
      *
      * @var string
      */
-    protected $signature = 'create:admin {email?} {name?}';
+    protected $signature = 'create:admin {--email=} {--name=}';
 
     /**
      * The console command description.
@@ -27,17 +27,17 @@ class CreateAdminAccount extends Command
      */
     public function handle()
     {
-        $email = $this->argument('email');
+        $email = $this->option('email');
         if (! isset($email)) {
             $email = $this->ask('Enter email for new admin account');
         }
 
-        $name = $this->argument('name');
+        $name = $this->option('name');
         if (! isset($name)) {
             $name = $this->ask('Enter name for new admin account');
         }
 
-        $password = config('admin.password');
+        $password = config('auth.admin.password');
         $passwordHash = Hash::make($password);
 
         User::create([
@@ -48,6 +48,6 @@ class CreateAdminAccount extends Command
             'password' => $passwordHash,
         ]);
 
-        $this->info("New admin account with email $email and name $name created succesfully!");
+        $this->info("New admin account with email '$email' and name '$name' created succesfully!");
     }
 }

@@ -47,4 +47,24 @@ class UpdatePasswordTest extends TestCase
         $this->assertTrue(Hash::check($newPassword, $user->password));
         $this->assertFalse($user->must_change_password);
     }
+
+    public function test_user_cant_change_password_with_wrong_password(): void
+    {
+        /** @var Authenticatable $user */
+        $user = User::factory()->create(['must_change_password' => true]);
+        $oldPasswordHash = $user->password;
+
+        $newPassword = 'a$$word123';
+        $data = [
+            'oldPassword' => 'Wrong password :(',
+            'newPassword' => $newPassword,
+            'newPasswordConfirmation' => $newPassword,
+        ];
+
+        $response = $this->actingAs($user)->post('api/password-update', $data);
+        $response->assertStatus(403);
+        /** @var User $user */
+        $this->assertFalse(Hash::check($newPassword, $user->password));
+        $this->assertTrue($user->must_change_password);
+    }
 }
