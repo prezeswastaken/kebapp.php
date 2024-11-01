@@ -5,53 +5,62 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Models\Kebab;
+use App\SortingOrder;
 use App\ValueObjects\KebabFilterParams;
+use App\ValueObjects\KebabSortParams;
 use Illuminate\Database\Eloquent\Builder;
 
 class GetSortedFilteredKebabsAction
 {
     public function __construct() {}
 
-    public function handle(KebabFilterParams $params): Builder
+    public function handle(KebabFilterParams $filterParams, KebabSortParams $sortingParams): Builder
     {
         return Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])
-            ->when($params->meatTypes, function (Builder $query, array $meatTypes) {
+            ->when($filterParams->meatTypes, function (Builder $query, array $meatTypes) {
                 $query->whereRelation('meatTypes', function ($q) use ($meatTypes) {
                     $q->whereIn('name', $meatTypes);
                 });
             })
-            ->when($params->sauces, function (Builder $query, array $sauces) {
+            ->when($filterParams->sauces, function (Builder $query, array $sauces) {
                 $query->whereRelation('sauces', function ($q) use ($sauces) {
                     $q->whereIn('name', $sauces);
                 });
             })
-            ->when($params->statuses, function (Builder $query, array $statuses) {
+            ->when($filterParams->statuses, function (Builder $query, array $statuses) {
                 $query->whereIn('status', $statuses);
             })
-            ->when(isset($params->isKraft), function (Builder $query) use ($params) {
-                $query->where('is_kraft', $params->isKraft);
+            ->when(isset($filterParams->isKraft), function (Builder $query) use ($filterParams) {
+                $query->where('is_kraft', $filterParams->isKraft);
             })
-            ->when(isset($params->isFoodTruck), function (Builder $query) use ($params) {
-                $query->where('is_food_truck', $params->isFoodTruck);
+            ->when(isset($filterParams->isFoodTruck), function (Builder $query) use ($filterParams) {
+                $query->where('is_food_truck', $filterParams->isFoodTruck);
             })
-            ->when(isset($params->hasGlovo), function (Builder $query) use ($params) {
-                $query->where('has_glovo', $params->hasGlovo);
+            ->when(isset($filterParams->hasGlovo), function (Builder $query) use ($filterParams) {
+                $query->where('has_glovo', $filterParams->hasGlovo);
             })
-            ->when(isset($params->hasPyszne), function (Builder $query) use ($params) {
-                $query->where('has_pyszne', $params->hasPyszne);
+            ->when(isset($filterParams->hasPyszne), function (Builder $query) use ($filterParams) {
+                $query->where('has_pyszne', $filterParams->hasPyszne);
             })
-            ->when(isset($params->hasUberEats), function (Builder $query) use ($params) {
-                $query->where('has_ubereats', $params->hasUberEats);
+            ->when(isset($filterParams->hasUberEats), function (Builder $query) use ($filterParams) {
+                $query->where('has_ubereats', $filterParams->hasUberEats);
             })
-            ->when(isset($params->hasPhone), function (Builder $query) use ($params) {
-                $params->hasPhone ? $query->whereNotNull('phone_number') : $query->whereNull('phone_number');
+            ->when(isset($filterParams->hasPhone), function (Builder $query) use ($filterParams) {
+                $filterParams->hasPhone ? $query->whereNotNull('phone_number') : $query->whereNull('phone_number');
             })
-            ->when(isset($params->hasWebsite), function (Builder $query) use ($params) {
-                $params->hasWebsite ? $query->whereNotNull('website_link') : $query->whereNull('website_link');
+            ->when(isset($filterParams->hasWebsite), function (Builder $query) use ($filterParams) {
+                $filterParams->hasWebsite ? $query->whereNotNull('website_link') : $query->whereNull('website_link');
             })
-            ->when(isset($params->hasNetwork), function (Builder $query) use ($params) {
-                $params->hasNetwork ? $query->whereNotNull('network') : $query->whereNull('network');
+            ->when(isset($filterParams->hasNetwork), function (Builder $query) use ($filterParams) {
+                $filterParams->hasNetwork ? $query->whereNotNull('network') : $query->whereNull('network');
             })
-            ->orderBy('id', 'desc');
+            ->when(isset($sortingParams->order), function (Builder $query) use ($sortingParams) {
+                $field = $sortingParams->field;
+                if ($sortingParams->order == SortingOrder::Ascending) {
+                    $query->orderBy($field);
+                } else {
+                    $query->orderByDesc($field);
+                }
+            });
     }
 }

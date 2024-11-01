@@ -10,27 +10,44 @@ use Illuminate\Http\Request;
 class KebabSortParams
 {
     public function __construct(
-        public readonly ?string $table,
+        public readonly ?string $field,
         public readonly ?SortingOrder $order,
     ) {}
 
     public static function fromRequest(Request $request)
     {
+        $allowedFields = ['name', 'openingYear', 'closingYear'];
+        $fieldMap = [
+            'name' => 'name',
+            'openingYear' => 'opening_year',
+            'closingYear' => 'closing_year',
+        ];
+
         if ($request->has('orderBy')) {
-            return new self(
-                table: $request->input('orderBy'),
-                order: SortingOrder::Ascending,
-            );
+            $order = SortingOrder::Ascending;
+            $field = $request->input('orderBy');
         } elseif ($request->has('orderByDesc')) {
-            return new self(
-                table: $request->input('orderByDesc'),
-                order: SortingOrder::Descending,
-            );
+            $order = SortingOrder::Descending;
+            $field = $request->input('orderByDesc');
         } else {
             return new self(
-                table: null,
+                field: null,
                 order: null,
             );
         }
+
+        if (! in_array($field, $allowedFields)) {
+            return new self(
+                field: null,
+                order: null,
+            );
+        }
+
+        $field = $fieldMap[$field];
+
+        return new self(
+            field: $field,
+            order: $order,
+        );
     }
 }
