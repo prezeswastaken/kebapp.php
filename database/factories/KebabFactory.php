@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Kebab;
+use App\Models\MeatType;
+use App\Models\Sauce;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -38,5 +41,16 @@ class KebabFactory extends Factory
             'created_at' => now(),
             'updated_at' => now(),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Kebab $kebab) {
+            $sauceIds = Sauce::inRandomOrder()->take(rand(1, Sauce::count()))->pluck('id');
+            $kebab->sauces()->attach($sauceIds);
+
+            $meatTypeIds = MeatType::inRandomOrder()->take(rand(1, MeatType::count()))->pluck('id');
+            $kebab->meatTypes()->attach($meatTypeIds);
+        });
     }
 }

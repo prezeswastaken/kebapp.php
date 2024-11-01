@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Actions\GetSortedFilteredKebabsAction;
 use App\Actions\StoreKebabAction;
 use App\Actions\StoreOpeningHoursAction;
 use App\Actions\UpdateKebabAction;
@@ -14,26 +15,42 @@ use App\Http\Resources\KebabResource;
 use App\Models\AdminLog;
 use App\Models\Kebab;
 use App\Models\User;
+use App\ValueObjects\KebabFilterParams;
+use App\ValueObjects\KebabSortParams;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class KebabController extends Controller
 {
-    public function paginated(Request $request)
+    public function paginated(Request $request, GetSortedFilteredKebabsAction $action)
     {
         $perPage = $request->get('perPage', 10);
 
-        return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])->orderBy('id', 'desc')->paginate($perPage));
+        $filterParams = KebabFilterParams::fromRequest($request);
+        $sortingParams = KebabSortParams::fromRequest($request);
+
+        return KebabResource::collection(
+            $action->handle($filterParams, $sortingParams)->paginate($perPage)
+        );
     }
 
-    public function index()
+    public function index(Request $request, GetSortedFilteredKebabsAction $action)
     {
-        return KebabResource::collection(Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])->orderBy('id', 'desc')->get());
+        $filterParams = KebabFilterParams::fromRequest($request);
+        $sortingParams = KebabSortParams::fromRequest($request);
+
+        return KebabResource::collection(
+            $action->handle($filterParams, $sortingParams)->get()
+        );
     }
 
-    public function store(StoreKebabRequest $request, StoreKebabAction $action, StoreOpeningHoursAction $storeOpeningHoursAction, #[CurrentUser] User $user): JsonResponse
-    {
+    public function store(
+        StoreKebabRequest $request,
+        StoreKebabAction $action,
+        StoreOpeningHoursAction $storeOpeningHoursAction,
+        #[CurrentUser] User $user,
+    ): JsonResponse {
         $kebabDTO = KebabDTO::fromRequest($request);
         $result = $action->handle($kebabDTO);
 

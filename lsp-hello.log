@@ -1,3 +1,4 @@
-2024/10/22 11:00:34 Logger started succesfully!
-2024/10/22 11:00:34 Initialize request received with name Neovim and version 0.10.2+v0.10.2
-2024/10/22 11:00:34 Unknown method: initialized
+2024/10/24 17:49:19 Logger started succesfully!
+2024/10/24 17:49:19 Initialize request received with name Neovim and version 0.10.2+v0.10.2
+2024/10/24 17:49:19 Unknown method: initialized
+2024/10/24 17:49:49 Unknown method: shutdown
