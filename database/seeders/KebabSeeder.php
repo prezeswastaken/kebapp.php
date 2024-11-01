@@ -12,6 +12,6 @@ class KebabSeeder extends Seeder
      */
     public function run(): void
     {
-        Kebab::factory()->count(10)->create();
+        Kebab::factory()->count(100)->create();
     }
 }

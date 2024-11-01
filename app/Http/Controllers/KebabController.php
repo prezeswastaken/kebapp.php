@@ -15,7 +15,7 @@ use App\Http\Resources\KebabResource;
 use App\Models\AdminLog;
 use App\Models\Kebab;
 use App\Models\User;
-use App\ValueObjects\KebabSortFilterParams;
+use App\ValueObjects\KebabFilterParams;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class KebabController extends Controller
     {
         $perPage = $request->get('perPage', 10);
 
-        $params = KebabSortFilterParams::fromRequest($request);
+        $params = KebabFilterParams::fromRequest($request);
 
         return KebabResource::collection(
             $action->handle($params)->paginate($perPage)
@@ -35,7 +35,7 @@ class KebabController extends Controller
 
     public function index(Request $request, GetSortedFilteredKebabsAction $action)
     {
-        $params = KebabSortFilterParams::fromRequest($request);
+        $params = KebabFilterParams::fromRequest($request);
 
         return KebabResource::collection(
             $action->handle($params)->get()

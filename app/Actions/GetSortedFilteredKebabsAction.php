@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Models\Kebab;
-use App\ValueObjects\KebabSortFilterParams;
+use App\ValueObjects\KebabFilterParams;
 use Illuminate\Database\Eloquent\Builder;
 
 class GetSortedFilteredKebabsAction
 {
     public function __construct() {}
 
-    public function handle(KebabSortFilterParams $params): Builder
+    public function handle(KebabFilterParams $params): Builder
     {
         return Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])
             ->when($params->meatTypes, function (Builder $query, array $meatTypes) {

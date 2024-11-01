@@ -6,7 +6,7 @@ namespace App\ValueObjects;
 
 use Illuminate\Http\Request;
 
-class KebabSortFilterParams
+class KebabFilterParams
 {
     public readonly ?bool $isKraft;
 
