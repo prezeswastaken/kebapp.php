@@ -34,6 +34,7 @@ class KebabResource extends JsonResource
             'hasUberEats' => $this->has_ubereats,
             'phoneNumber' => $this->phone_number,
             'likeCount' => isset($this->likes) ? $this->likes->count() : null,
+            'isOpenNow' => $this->whenLoaded('openingHours', $this->isOpenNow()),
             'meatTypes' => MeatTypeResource::collection($this->whenLoaded('meatTypes')),
             'sauces' => SauceResource::collection($this->whenLoaded('sauces')),
             'openingHours' => OpeningHoursDayResource::collection($this->whenLoaded('openingHours')),
