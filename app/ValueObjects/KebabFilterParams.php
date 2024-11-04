@@ -24,6 +24,8 @@ class KebabFilterParams
 
     public readonly ?bool $hasNetwork;
 
+    public readonly ?bool $isOpenNow;
+
     private function __construct(
         public readonly ?array $meatTypes,
         public readonly ?array $sauces,
@@ -36,6 +38,7 @@ class KebabFilterParams
         ?string $hasPhone,
         ?string $hasWebsite,
         ?string $hasNetwork,
+        ?string $isOpenNow,
     ) {
         $this->isKraft = $this->parseBool($isKraft);
         $this->isFoodTruck = $this->parseBool($isFoodTruck);
@@ -45,6 +48,7 @@ class KebabFilterParams
         $this->hasPhone = $this->parseBool($hasPhone);
         $this->hasWebsite = $this->parseBool($hasWebsite);
         $this->hasNetwork = $this->parseBool($hasNetwork);
+        $this->isOpenNow = $this->parseBool($isOpenNow);
     }
 
     public static function fromRequest(Request $request)
@@ -61,6 +65,7 @@ class KebabFilterParams
             hasPhone: $request->get('hasPhone'),
             hasWebsite: $request->get('hasWebsite'),
             hasNetwork: $request->get('hasNetwork'),
+            isOpenNow: $request->get('isOpenNow'),
         );
     }
 

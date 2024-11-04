@@ -233,4 +233,28 @@ class FilterKebabsTest extends TestCase
             return $kebab['hasUberEats'] === false;
         }));
     }
+
+    public function test_filtering_by_has_is_open_now(): void
+    {
+        $response = $this->get('/api/kebabs?isOpenNow=true');
+
+        $response->assertStatus(200);
+
+        $kebabs = $response->json();
+        $this->assertTrue(collect($kebabs)->every(function ($kebab) {
+            return $kebab['isOpenNow'] === true;
+        }));
+    }
+
+    public function test_filtering_by_has_is_open_now_false(): void
+    {
+        $response = $this->get('/api/kebabs?isOpenNow=false');
+
+        $response->assertStatus(200);
+
+        $kebabs = $response->json();
+        $this->assertTrue(collect($kebabs)->every(function ($kebab) {
+            return $kebab['isOpenNow'] === false;
+        }));
+    }
 }

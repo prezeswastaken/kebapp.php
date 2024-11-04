@@ -43,6 +43,12 @@ class AuthController extends Controller
 
     public function me(#[CurrentUser] User $user)
     {
+        $user->load([
+            'likes' => function ($query) {
+                $query->with(['openingHours', 'likes', 'sauces', 'meatTypes']);
+            },
+        ]);
+
         return UserResource::make($user);
     }
 
