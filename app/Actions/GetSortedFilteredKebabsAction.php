@@ -17,7 +17,7 @@ class GetSortedFilteredKebabsAction
 
     public function handle(KebabFilterParams $filterParams, KebabSortParams $sortingParams): Builder
     {
-        return Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes'])
+        return Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes', 'comments.user'])
             ->when($filterParams->meatTypes, function (Builder $query, array $meatTypes) {
                 $query->whereRelation('meatTypes', function ($q) use ($meatTypes) {
                     $q->whereIn('name', $meatTypes);
