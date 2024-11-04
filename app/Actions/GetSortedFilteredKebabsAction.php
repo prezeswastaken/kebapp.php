@@ -8,6 +8,7 @@ use App\Models\Kebab;
 use App\SortingOrder;
 use App\ValueObjects\KebabFilterParams;
 use App\ValueObjects\KebabSortParams;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
 class GetSortedFilteredKebabsAction
@@ -53,6 +54,24 @@ class GetSortedFilteredKebabsAction
             })
             ->when(isset($filterParams->hasNetwork), function (Builder $query) use ($filterParams) {
                 $filterParams->hasNetwork ? $query->whereNotNull('network') : $query->whereNull('network');
+            })
+            ->when(isset($filterParams->isOpenNow), function (Builder $query) use ($filterParams) {
+                $currentTime = Carbon::now('Europe/Warsaw');
+                $currentWeekDay = strtolower($currentTime->format('l'));
+
+                if ($filterParams->isOpenNow) {
+                    $query->whereHas('openingHours', function (Builder $query) use ($currentWeekDay, $currentTime) {
+                        $query->where('week_day', $currentWeekDay)
+                            ->whereTime('opens_at', '<=', $currentTime->toTimeString())
+                            ->whereTime('closes_at', '>', $currentTime->toTimeString());
+                    });
+                } else {
+                    $query->whereDoesntHave('openingHours', function (Builder $query) use ($currentWeekDay, $currentTime) {
+                        $query->where('week_day', $currentWeekDay)
+                            ->whereTime('opens_at', '<=', $currentTime->toTimeString())
+                            ->whereTime('closes_at', '>', $currentTime->toTimeString());
+                    });
+                }
             })
             ->when(isset($sortingParams->order), function (Builder $query) use ($sortingParams) {
                 $field = $sortingParams->field;
