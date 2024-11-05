@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FetchGlovoRatesController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Middleware\AdminOnly;
@@ -45,5 +46,7 @@ Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
     Route::post('admin-messages/{message}/accept', [App\Http\Controllers\AdminMessageController::class, 'accept']);
     Route::get('admin-messages', [App\Http\Controllers\AdminMessageController::class, 'index']);
     Route::delete('admin-messages/{message}', [App\Http\Controllers\AdminMessageController::class, 'delete']);
+
+    Route::post('rates-glovo', FetchGlovoRatesController::class);
 
 });

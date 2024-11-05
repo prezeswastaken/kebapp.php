@@ -30,6 +30,7 @@ class KebabResource extends JsonResource
             'appLink' => $this->app_link,
             'websiteLink' => $this->website_link,
             'glovoUrl' => $this->glovo_url,
+            'glovoRates' => $this->glovo_rates,
             'hasGlovo' => $this->has_glovo,
             'hasPyszne' => $this->has_pyszne,
             'hasUberEats' => $this->has_ubereats,

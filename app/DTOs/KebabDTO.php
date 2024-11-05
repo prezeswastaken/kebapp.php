@@ -32,6 +32,7 @@ class KebabDTO
         public readonly ?string $phoneNumber,
         public readonly array $meatTypeIds,
         public readonly array $sauceIds,
+        public readonly ?string $glovoUrl,
     ) {}
 
     public static function fromRequest(Request $request): self
@@ -56,6 +57,7 @@ class KebabDTO
             $request->input('phoneNumber'),
             $request->input('meatTypeIds'),
             $request->input('sauceIds'),
+            $request->input('glovoUrl'),
         );
     }
 
@@ -78,6 +80,7 @@ class KebabDTO
             'has_pyszne' => $this->hasPyszne,
             'has_ubereats' => $this->hasUberEats,
             'phone_number' => $this->phoneNumber,
+            'glovo_url' => $this->glovoUrl,
         ];
     }
 }

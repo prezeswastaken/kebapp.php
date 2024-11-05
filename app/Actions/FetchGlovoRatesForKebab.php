@@ -9,30 +9,27 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class FetchGlovoRatesForKebab
 {
-    public function handle(string $url)
+    public function handle(string $url): int
     {
         try {
-            // Create a Guzzle client to fetch the URL content
             $client = new Client;
             $response = $client->get($url);
 
-            // Check if the response status is OK
             if ($response->getStatusCode() !== 200) {
                 throw new \Exception('Failed to retrieve the page');
             }
 
-            // Get the HTML content of the page
             $htmlContent = $response->getBody()->getContents();
 
-            // Use Symfony's Crawler to parse the HTML content
             $crawler = new Crawler($htmlContent);
 
-            // Search for the element with data-test-id="store-rating-label"
             $element = $crawler->filter('[data-test-id="store-rating-label"]')->first();
 
-            // If found, return the content; otherwise, indicate it was not found
             if ($element->count()) {
-                return $element->text();
+                $text = $element->text();
+                $rate = intval(explode('%', $text)[0]);
+
+                return $rate;
             } else {
                 dd('Element with data-test-id="store-rating-label" not found');
             }
