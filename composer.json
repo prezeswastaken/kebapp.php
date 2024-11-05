@@ -10,6 +10,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "spatie/opening-hours": "^4.0",
+        "symfony/dom-crawler": "^7.1",
         "symfony/filesystem": "^7.1",
         "tymon/jwt-auth": "^2.1"
     },

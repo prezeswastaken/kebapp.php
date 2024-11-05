@@ -45,7 +45,7 @@ class AuthController extends Controller
     {
         $user->load([
             'likes' => function ($query) {
-                $query->with(['openingHours', 'likes', 'sauces', 'meatTypes']);
+                $query->with(['openingHours', 'likes', 'sauces', 'meatTypes', 'comments.user']);
             },
         ]);
 
