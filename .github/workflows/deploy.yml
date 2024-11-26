@@ -20,7 +20,7 @@ jobs:
 
     - name: Deploy to DigitalOcean Droplet
       run: |
-        ssh -o StrictHostKeyChecking=no root@kebapp.wheelwallet.cloud << 'EOF'
+        ssh -o StrictHostKeyChecking=no root@kebapp.bity24h.pl << 'EOF'
           cd /var/www/laravel
           git pull origin main
         EOF
