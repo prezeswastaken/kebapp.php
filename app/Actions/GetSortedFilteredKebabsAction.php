@@ -17,12 +17,14 @@ class GetSortedFilteredKebabsAction
 
     public function handle(KebabFilterParams $filterParams, KebabSortParams $sortingParams): Builder
     {
-        return Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes', 'comments.user'])
-            ->when($filterParams->meatTypes, function (Builder $query, array $meatTypes) {
-                $query->whereRelation('meatTypes', function ($q) use ($meatTypes) {
-                    $q->whereIn('name', $meatTypes);
-                });
-            })
+        $query = Kebab::with(['openingHours', 'meatTypes', 'sauces', 'likes', 'comments.user']);
+
+        // Apply filters
+        $query->when($filterParams->meatTypes, function (Builder $query, array $meatTypes) {
+            $query->whereRelation('meatTypes', function ($q) use ($meatTypes) {
+                $q->whereIn('name', $meatTypes);
+            });
+        })
             ->when($filterParams->sauces, function (Builder $query, array $sauces) {
                 $query->whereRelation('sauces', function ($q) use ($sauces) {
                     $q->whereIn('name', $sauces);
@@ -72,14 +74,18 @@ class GetSortedFilteredKebabsAction
                             ->whereTime('closes_at', '>', $currentTime->toTimeString());
                     });
                 }
-            })
-            ->when(isset($sortingParams->order), function (Builder $query) use ($sortingParams) {
-                $field = $sortingParams->field;
-                if ($sortingParams->order == SortingOrder::Ascending) {
-                    $query->orderBy($field);
-                } else {
-                    $query->orderByDesc($field);
-                }
             });
+
+        // Apply sorting at the query level
+        if (isset($sortingParams->order)) {
+            $field = $sortingParams->field;
+            if ($sortingParams->order === SortingOrder::Ascending) {
+                $query->orderBy($field);
+            } else {
+                $query->orderByDesc($field);
+            }
+        }
+
+        return $query; // Return the query builder instance
     }
 }
