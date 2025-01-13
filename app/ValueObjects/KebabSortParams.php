@@ -16,11 +16,12 @@ class KebabSortParams
 
     public static function fromRequest(Request $request)
     {
-        $allowedFields = ['name', 'openingYear', 'closingYear'];
+        $allowedFields = ['name', 'openingYear', 'closingYear', 'glovoRates'];
         $fieldMap = [
             'name' => 'name',
             'openingYear' => 'opening_year',
             'closingYear' => 'closing_year',
+            'glovoRates' => 'glovo_rates',
         ];
 
         if ($request->has('orderBy')) {
