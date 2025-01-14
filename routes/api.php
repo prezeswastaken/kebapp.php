@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FetchGlovoRatesController;
+use App\Http\Controllers\FetchGoogleRatesController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Middleware\AdminOnly;
@@ -48,5 +49,6 @@ Route::middleware([AuthOnly::class, AdminOnly::class])->group(function () {
     Route::delete('admin-messages/{message}', [App\Http\Controllers\AdminMessageController::class, 'delete']);
 
     Route::post('rates-glovo', FetchGlovoRatesController::class);
+    Route::post('rates-google', FetchGoogleRatesController::class);
 
 });
